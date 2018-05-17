@@ -2,26 +2,19 @@ import React, { Component } from 'react';
 import './App.css';
 import Menu from "../components/Menu";
 import AnswersContainer from "./AnswersContainer";
-import Game from "../core/Game";
 import { connect } from 'react-redux'
+import {pageActionFetch} from "../actions/gameActions";
 
 class App extends Component
 {
-    constructor()
-    {
-        super();
-
-        this.game = new Game();
-    }
-
     componentDidMount()
     {
-        this.game.run();
+        this.props.dispatch(pageActionFetch(this.props.character, this.props.page, 0));
     }
 
     answerSelect(selected)
     {
-        this.game.chooseAnswer(selected);
+        this.props.dispatch(pageActionFetch(this.props.character, this.props.page, selected));
     }
 
     render() {
@@ -52,9 +45,8 @@ class App extends Component
                           </div>
                       </div>
                   </Menu>
-                  <div className="row" style={{height: '60%'}}>
-                      <div className="col">
-                          {this.props.body}
+                  <div className="row game-viewport">
+                      <div className="col" dangerouslySetInnerHTML={{__html: this.props.body}}>
                       </div>
                   </div>
                   <hr className='separator-h' />
@@ -74,5 +66,6 @@ export default connect((state) => {
         character: state.character,
         answers: state.answers,
         body: state.body,
+        page: state.page,
     };
 })(App);

@@ -15,3 +15,8 @@ body {
 .separator-h {
     background-color: white;
 }
+
+.game-viewport {
+    height: 60%;
+    overflow-y: scroll;
+}
