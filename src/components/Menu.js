@@ -46,6 +46,7 @@ export default class Menu extends React.Component
         return (
             <div className={'row ' + this.props.className} style={this.props.style}>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-12">
+                    {this.props.is_loading ? <div className='loader' /> : ''}
                     {/*<a className="navbar-brand" href="/"></a>*/}
                     <button style={{display: "inline-block", marginLeft: 'auto'}} className="navbar-toggler" type="button" onClick={this.toggle}>
                         <span className="navbar-toggler-icon" />
@@ -67,9 +68,11 @@ export default class Menu extends React.Component
 Menu.propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
+    is_loading: PropTypes.bool,
 };
 
 Menu.defaultProps = {
     className: '',
     style: {},
+    is_loading: false,
 };
