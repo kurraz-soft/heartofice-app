@@ -44,8 +44,8 @@ export default class Menu extends React.Component
         };
 
         return (
-            <div className={'row ' + this.props.className} style={this.props.style}>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark col-12">
+            <div className={'row ' + this.props.className} style={Object.assign({},this.props.style,{height: '56px'})}>
+                <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark col-12">
                     {this.props.is_loading ? <div className='loader' /> : ''}
                     {/*<a className="navbar-brand" href="/"></a>*/}
                     <button style={{display: "inline-block", marginLeft: 'auto'}} className="navbar-toggler" type="button" onClick={this.toggle}>

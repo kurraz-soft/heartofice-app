@@ -12,13 +12,20 @@ body {
     height: inherit;
 }
 
+#portal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 .separator-h {
     background-color: white;
 }
 
 .game-viewport {
-    height: 60%;
-    overflow-y: auto;
+    /*height: 60%;*/
+    /*overflow-y: auto;*/
 }
 
 .game-viewport-full {
@@ -31,4 +38,16 @@ body {
     background: url("/ajax-loader.gif");
     width: 16px;
     height: 16px;
+}
+
+.icon-coin {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url("/img/coin-20.png") center center;
+}
+
+.app-notify {
+    width: 100%;
+    margin-top: 70px;
 }
