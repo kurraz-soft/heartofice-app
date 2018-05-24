@@ -84,8 +84,9 @@ export function loadPage(page, character) {
 }
 
 export function startNewGame() {
-    return {
-        type: ActionTypes.NEW_GAME,
+    return (dispatch) => {
+        dispatch({type: ActionTypes.NEW_GAME});
+        return Promise.resolve();
     }
 }
 

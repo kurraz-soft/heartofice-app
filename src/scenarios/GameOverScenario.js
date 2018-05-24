@@ -6,8 +6,9 @@ class GameOverScenario extends React.Component
 {
     newGame()
     {
-        this.props.dispatch(startNewGame());
-        window.location.reload();
+        this.props.dispatch(startNewGame()).then(() => {
+            window.location.reload();
+        });
     }
 
     render()

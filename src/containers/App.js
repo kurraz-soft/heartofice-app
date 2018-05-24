@@ -11,9 +11,10 @@ class App extends Component
 {
     componentDidMount()
     {
-        /*if(this.props.page === 'start' || this.props.page === 'test_take_items')
-            this.props.dispatch(pageActionFetch(this.props.character, this.props.page, 0));*/
-        this.props.dispatch(loadPage(this.props.page, this.props.character));
+        if(this.props.page === 'start')
+            this.props.dispatch(loadPage(this.props.page, this.props.character));
+
+        //this.props.dispatch(pageActionFetch(this.props.character, this.props.page, 0));
     }
 
     answerSelect(selected)

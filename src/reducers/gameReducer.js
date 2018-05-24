@@ -17,7 +17,7 @@ const initialState = {
     },
     answers: [],
     body: '',
-    page: 'test_shop', //TODO test!
+    page: 'start',
     is_loading: false,
     scenario: '',
     params: [],
@@ -55,10 +55,7 @@ export default function (state = initialState, action) {
         }
         case ActionTypes.NEW_GAME:
         {
-            return {
-                ...state,
-                initialState,
-            }
+            return Object.assign({}, state, initialState);
         }
         case ActionTypes.TAKE_ITEM:
         {
