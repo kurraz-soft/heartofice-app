@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {buyItem, showNotify, takeItem, throwItem, toggleItemsUI} from "../actions/gameActions";
 import InventoryUtil from "../utils/Inventory";
+import ItemTypes from "../utils/ItemTypes";
 
 class ShopScenario extends React.Component
 {
@@ -39,6 +40,10 @@ class ShopScenario extends React.Component
 
     render()
     {
+        const ItemName = (props) => (
+           <span>{ props.item.name }{props.item.type === ItemTypes.FIREARM ? ` (${props.item.count})` : '' }</span>
+        );
+
         return (
             <div className="col">
                 <div className={this.props.is_opened ? 'd-none' : ''}>
@@ -63,7 +68,7 @@ class ShopScenario extends React.Component
                                                             <span className="icon-coin" />
                                                             <span className="">{item.price}</span>
                                                         </div>
-                                                        <div className="col-md-9 col-7">{ item.name } ({item.count}) &nbsp;&nbsp;&nbsp;</div>
+                                                        <div className="col-md-9 col-7"><ItemName item={item}/> &nbsp;&nbsp;&nbsp;</div>
                                                         <button onClick={() => this.buy(index)} className="btn btn-warning col-md-1 col-2"><span className="oi oi-arrow-right" /></button>
                                                     </div>
                                                 </li>
@@ -86,7 +91,7 @@ class ShopScenario extends React.Component
                                             return (
                                                 <li key={index} className="bg-primary list-group-item">
                                                     <div className="row">
-                                                        <div className="col-md-10 col-10">{ item.name } ({item.count}) &nbsp;&nbsp;&nbsp;</div>
+                                                        <div className="col-md-10 col-10"><ItemName item={item}/> &nbsp;&nbsp;&nbsp;</div>
                                                         <button onClick={() => this.throw(index)} className="btn btn-warning col-md-1 col-2"><span className="oi oi-arrow-right" /></button>
                                                     </div>
                                                 </li>
@@ -107,7 +112,7 @@ class ShopScenario extends React.Component
                                                 <li key={index} className="bg-primary list-group-item">
                                                     <div className="row">
                                                         <button onClick={() => this.take(index)} className="btn btn-warning col-md-1 col-2"><span className="oi oi-arrow-left" /></button>
-                                                        <div className="col-md-10 col-10">{ item.name } ({item.count}) &nbsp;&nbsp;&nbsp;</div>
+                                                        <div className="col-md-10 col-10"><ItemName item={item}/> &nbsp;&nbsp;&nbsp;</div>
                                                     </div>
                                                 </li>
                                             )

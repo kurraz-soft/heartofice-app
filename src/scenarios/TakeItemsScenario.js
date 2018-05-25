@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {takeItem, throwItem, toggleItemsUI} from "../actions/gameActions";
 import InventoryUtil from "../utils/Inventory";
+import ItemTypes from "../utils/ItemTypes";
 
 class TakeItemsScenario extends React.Component
 {
@@ -29,6 +30,10 @@ class TakeItemsScenario extends React.Component
 
     render()
     {
+        const ItemName = (props) => (
+            <span className="p-2">{ props.item.name }{props.item.type === ItemTypes.FIREARM ? ` (${props.item.count})` : '' }</span>
+        );
+
         return (
             <div className="col">
                 <div className={this.props.is_opened ? 'd-none' : ''}>
@@ -48,7 +53,7 @@ class TakeItemsScenario extends React.Component
                                     { this.props.items.map((item, index) => {
                                         return (
                                             <li key={index} className="bg-primary clearfix mt-2">
-                                                <span className="p-2">{ item.name } ({item.count})</span>
+                                                <ItemName item={item} />
                                                 <button onClick={() => this.take(index)} className="btn btn-warning float-right"><span className="oi oi-arrow-right" /></button>
                                             </li>
                                         )
@@ -67,7 +72,7 @@ class TakeItemsScenario extends React.Component
                                     { this.props.character.inventory.items.map((item, index) => {
                                         return (
                                             <li key={index} className="bg-primary clearfix mt-2">
-                                                <span className="p-2">{ item.name } ({item.count})</span>
+                                                <ItemName item={item} />
                                                 <button onClick={() => this.throw(index)} className="btn btn-warning float-left"><span className="oi oi-arrow-left" /></button>
                                             </li>
                                         )

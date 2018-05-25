@@ -7,30 +7,9 @@ export default class Inventory
 
         if(items[index].weight > 0 && inv_to.maxWeight && this.calcInventoryWeight(inv_to) === inv_to.maxWeight) return;
 
-        let inv_index = -1;
+        inventory.push(items[index]);
 
-        //change count & unset item
-        inventory.forEach((inv_item, i) => {
-            if(inv_item.name === items[index].name)
-            {
-                inv_index = i;
-            }
-        });
-
-        if(inv_index === -1)
-        {
-            inventory.push({
-                ...items[index],
-                count: 1,
-            });
-        }else
-        {
-            inventory[inv_index].count++;
-        }
-
-        items[index].count--;
-        if(items[index].count === 0)
-            items.splice(index, 1);
+        items.splice(index, 1);
 
         inv_from = {
             ...inv_from,
@@ -48,7 +27,7 @@ export default class Inventory
         let weight = 0;
 
         inv.items.forEach((item) => {
-            weight += item.weight * item.count;
+            weight += item.weight;
         });
 
         return weight;

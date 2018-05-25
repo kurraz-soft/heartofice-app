@@ -17,7 +17,7 @@ const initialState = {
     },
     answers: [],
     body: '',
-    page: 'start',
+    page: 'test_take_items',
     is_loading: false,
     scenario: '',
     params: [],
