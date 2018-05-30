@@ -6,6 +6,8 @@ export default class Inventory
         let inventory = inv_to.items;
 
         if(items[index].weight > 0 && inv_to.maxWeight && this.calcInventoryWeight(inv_to) === inv_to.maxWeight) return;
+        if(inv_from.takeLimit && inv_from.taken >= inv_from.takeLimit) return;
+        inv_from.taken++;
 
         inventory.push(items[index]);
 

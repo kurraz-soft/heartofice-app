@@ -6,6 +6,7 @@ export const ActionTypes = {
     PAGE_ACTION_RESPONSE: 'page_action_response',
     NEW_GAME: 'new_game',
     TAKE_ITEM: 'take_item',
+    TAKE_GROUND_ITEM: 'take_ground_item',
     THROW_ITEM: 'throw_item',
     BUY_ITEM: 'buy_item',
     TOGGLE_ITEMS_UI: 'toggle_items_ui',
@@ -93,6 +94,13 @@ export function startNewGame() {
 export function takeItem(index) {
     return {
         type: ActionTypes.TAKE_ITEM,
+        index,
+    };
+}
+
+export function takeGroundItem(index) {
+    return {
+        type: ActionTypes.TAKE_GROUND_ITEM,
         index,
     };
 }

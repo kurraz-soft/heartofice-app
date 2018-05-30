@@ -61,6 +61,7 @@ export default function (state = initialState, action) {
         {
             let items = state.params.takeItems;
             let inventory = state.character.inventory;
+            items.taken = items.taken ? items.taken : 0;
 
             InventoryUtil.moveInventoryItem(items, inventory, action.index);
 
@@ -76,9 +77,28 @@ export default function (state = initialState, action) {
                 }
             }
         }
+        case ActionTypes.TAKE_GROUND_ITEM:
+        {
+            let items = state.params.groundItems ? state.params.groundItems : {items: [], maxWeight: 0};
+            let inventory = state.character.inventory;
+
+            InventoryUtil.moveInventoryItem(items, inventory, action.index);
+
+            return {
+                ...state,
+                character: {
+                    ...state.character,
+                    inventory: inventory,
+                },
+                params: {
+                    ...state.params,
+                    groundItems: items,
+                }
+            }
+        }
         case ActionTypes.THROW_ITEM:
         {
-            let items = state.params.takeItems;
+            let items = state.params.groundItems ? state.params.groundItems : {items: [], maxWeight: 0};
             let inventory = state.character.inventory;
 
             InventoryUtil.moveInventoryItem(inventory, items, action.index);
@@ -91,7 +111,7 @@ export default function (state = initialState, action) {
                 },
                 params: {
                     ...state.params,
-                    takeItems: items,
+                    groundItems: items,
                 }
             }
         }
