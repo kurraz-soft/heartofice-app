@@ -9,6 +9,7 @@ export const ActionTypes = {
     TAKE_GROUND_ITEM: 'take_ground_item',
     THROW_ITEM: 'throw_item',
     BUY_ITEM: 'buy_item',
+    SELL_ITEM: 'sell_item',
     TOGGLE_ITEMS_UI: 'toggle_items_ui',
     NOTIFY_SHOW: 'notify_show',
     NOTIFY_HIDE: 'notify_hide',
@@ -116,6 +117,14 @@ export function buyItem(index) {
     return {
         type: ActionTypes.BUY_ITEM,
         index,
+    }
+}
+
+export function sellItem(index, price) {
+    return {
+        type: ActionTypes.SELL_ITEM,
+        index,
+        price,
     }
 }
 

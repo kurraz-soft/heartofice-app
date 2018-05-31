@@ -20,7 +20,6 @@ class TakeItemsScenario extends React.Component
 
     take(index)
     {
-        //TODO limit function
         this.props.dispatch(takeItem(index));
     }
 
