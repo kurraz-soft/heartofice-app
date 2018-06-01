@@ -12,7 +12,7 @@ class App extends Component
 {
     componentDidMount()
     {
-        if(this.props.page === 'start' || this.props.page.match(/^test_/))
+        if(this.props.page === 'start' || this.props.page.toString().match(/^test_/))
             this.props.dispatch(loadPage(this.props.page, this.props.character));
 
         //this.props.dispatch(pageActionFetch(this.props.character, this.props.page, 0));

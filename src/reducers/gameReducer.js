@@ -17,10 +17,10 @@ const initialState = {
     },
     answers: [],
     body: '',
-    page: 'test_take_items',
+    page: 'start',
     is_loading: false,
     scenario: '',
-    params: [],
+    params: {},
     item_ui_opened: false,
     notify: {
         text: '',
@@ -135,6 +135,24 @@ export default function (state = initialState, action) {
                     ...state.params,
                     shop: items,
                 }
+            }
+        }
+        case ActionTypes.SELL_ITEM:
+        {
+            let items = [...state.character.inventory.items];
+
+            items.splice(action.index, 1);
+
+            return {
+                ...state,
+                character: {
+                    ...state.character,
+                    inventory: {
+                        ...state.character.inventory,
+                        items: items,
+                    },
+                    money: parseInt(state.character.money, 10) + parseInt(action.price, 10)
+                },
             }
         }
         case ActionTypes.TOGGLE_ITEMS_UI:

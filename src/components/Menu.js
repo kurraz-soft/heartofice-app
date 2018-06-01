@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Saves from "../containers/Saves";
 
 export default class Menu extends React.Component
 {
@@ -8,15 +9,30 @@ export default class Menu extends React.Component
         super(props);
 
         this.state = {
-            'is_opened': false,
+            is_opened: false,
+            is_save_block_opened: false,
         };
 
         this.toggle = this.toggle.bind(this);
+        this.toggleSaveBlock = this.toggleSaveBlock.bind(this);
     }
 
     toggle()
     {
         this.setState({is_opened: !this.state.is_opened});
+    }
+
+    closeAll()
+    {
+        this.setState({
+            is_opened: false,
+            is_save_block_opened: false,
+        })
+    }
+
+    toggleSaveBlock()
+    {
+        this.setState({is_save_block_opened: !this.state.is_save_block_opened});
     }
 
     render()
@@ -31,6 +47,16 @@ export default class Menu extends React.Component
             padding: '15px',
         };
 
+        const collapsedSaveBlockStyle = {
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            zIndex: '1000',
+            height: '100vh',
+            display: this.state.is_save_block_opened?'block':'none',
+            padding: '15px',
+        };
+
         const overlayStyle = {
             position: 'absolute',
             top: 0,
@@ -40,7 +66,7 @@ export default class Menu extends React.Component
             opacity: 0.3,
             height: "100vh",
             width: "100vw",
-            display: this.state.is_opened?'block':'none',
+            display: (this.state.is_opened || this.state.is_save_block_opened)?'block':'none',
         };
 
         return (
@@ -48,16 +74,32 @@ export default class Menu extends React.Component
                 <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark col-12">
                     {this.props.is_loading ? <div className='loader' /> : ''}
                     {/*<a className="navbar-brand" href="/"></a>*/}
-                    <button style={{display: "inline-block", marginLeft: 'auto'}} className="navbar-toggler" type="button" onClick={this.toggle}>
-                        <span className="navbar-toggler-icon" />
-                    </button>
-                    <div className='navbar-overlay' style={overlayStyle} onClick={this.toggle} />
+                    <div style={{display: "inline-block", marginLeft: 'auto'}}>
+                        <button style={{display: "inline-block"}} className="navbar-toggler" type="button" onClick={this.toggleSaveBlock}>
+                            <span className="oi oi-bookmark" />
+                        </button>
+                        <button style={{display: "inline-block"}} className="navbar-toggler" type="button" onClick={this.toggle}>
+                            <span className="oi oi-person" />
+                        </button>
+                    </div>
+                    <div className='navbar-overlay' style={overlayStyle} onClick={() => {this.closeAll()}} />
                     <div className="bg-dark" style={collapsedBlockStyle}>
                         <button type="button" className="close text-white" aria-label="Close" onClick={this.toggle}>
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <br />
                         {this.props.children}
+                    </div>
+                    <div className="bg-dark" style={collapsedSaveBlockStyle}>
+                        <button type="button" className="close text-white" aria-label="Close" onClick={this.toggleSaveBlock}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <br />
+                        <div style={{padding: '10px', textAlign: 'center'}}>
+                            <h3 className="text-light">Закладки</h3>
+                            <hr className="bg-light" />
+                            <Saves />
+                        </div>
                     </div>
                 </nav>
             </div>
