@@ -25,8 +25,11 @@ export default class BugForm extends React.Component
     {
         this.setState({is_loading: true});
 
+        const storeState = store.getState();
+
         axios.post(config.api.reportBug,{
             text: this.state.text,
+            page: storeState.page,
         }).then((response) => {
             this.setState({is_loading: false, text: ""});
 
