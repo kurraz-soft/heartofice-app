@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Saves from "../containers/Saves";
+import BugForm from "../containers/BugForm";
 
 export default class Menu extends React.Component
 {
@@ -15,6 +16,7 @@ export default class Menu extends React.Component
 
         this.toggle = this.toggle.bind(this);
         this.toggleSaveBlock = this.toggleSaveBlock.bind(this);
+        this.toggleBugBlock = this.toggleBugBlock.bind(this);
     }
 
     toggle()
@@ -27,12 +29,18 @@ export default class Menu extends React.Component
         this.setState({
             is_opened: false,
             is_save_block_opened: false,
+            is_bug_block_opened: false,
         })
     }
 
     toggleSaveBlock()
     {
         this.setState({is_save_block_opened: !this.state.is_save_block_opened});
+    }
+
+    toggleBugBlock()
+    {
+        this.setState({is_bug_block_opened: !this.state.is_bug_block_opened});
     }
 
     render()
@@ -57,6 +65,16 @@ export default class Menu extends React.Component
             padding: '15px',
         };
 
+        const collapsedBugBlockStyle = {
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            zIndex: '1000',
+            height: '100vh',
+            display: this.state.is_bug_block_opened?'block':'none',
+            padding: '15px',
+        };
+
         const overlayStyle = {
             position: 'absolute',
             top: 0,
@@ -66,7 +84,7 @@ export default class Menu extends React.Component
             opacity: 0.3,
             height: "100vh",
             width: "100vw",
-            display: (this.state.is_opened || this.state.is_save_block_opened)?'block':'none',
+            display: (this.state.is_opened || this.state.is_save_block_opened || this.state.is_bug_block_opened)?'block':'none',
         };
 
         return (
@@ -75,6 +93,9 @@ export default class Menu extends React.Component
                     {this.props.is_loading ? <div className='loader' /> : ''}
                     {/*<a className="navbar-brand" href="/"></a>*/}
                     <div style={{display: "inline-block", marginLeft: 'auto'}}>
+                        <button style={{display: "inline-block"}} className="navbar-toggler mr-2" type="button" onClick={this.toggleBugBlock}>
+                            <span className="oi oi-bug" />
+                        </button>
                         <button style={{display: "inline-block"}} className="navbar-toggler" type="button" onClick={this.toggleSaveBlock}>
                             <span className="oi oi-bookmark" />
                         </button>
@@ -99,6 +120,17 @@ export default class Menu extends React.Component
                             <h3 className="text-light">Закладки</h3>
                             <hr className="bg-light" />
                             <Saves />
+                        </div>
+                    </div>
+                    <div className="bg-dark" style={collapsedBugBlockStyle}>
+                        <button type="button" className="close text-white" aria-label="Close" onClick={this.toggleBugBlock}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <br />
+                        <div style={{padding: '10px', textAlign: 'center'}}>
+                            <h3 className="text-light">Сообщить об ошибке</h3>
+                            <hr className="bg-light" />
+                            <BugForm />
                         </div>
                     </div>
                 </nav>
