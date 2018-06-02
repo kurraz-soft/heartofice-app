@@ -5,6 +5,10 @@ Heart Of Ice (web app client)
 * redux-thunk
 * CRA Project
 
+Setup
+---
+Configure ./config.js
+
 Build
 -----
 `npm run build`
