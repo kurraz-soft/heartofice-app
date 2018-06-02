@@ -12,3 +12,7 @@ Configure ./config.js
 Build
 -----
 `npm run build`
+
+Demo
+---
+<http://hoi.kurraz-soft.com>
