@@ -7,7 +7,9 @@ Heart Of Ice (web app client)
 
 Setup
 ---
-Configure ./config.js
+`npm install`
+
+Configure ./src/config.js
 
 Build
 -----
